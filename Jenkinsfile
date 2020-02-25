@@ -9,8 +9,7 @@ pipeline {
           }
           steps {
             sleep 3
-            echo 'hello version'
-            dir(path: '/home')
+            echo 'hello env.version'
           }
         }
 
