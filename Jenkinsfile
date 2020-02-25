@@ -9,38 +9,37 @@ pipeline {
           }
           steps {
             sleep 3
-            bat 'echo hello'
-            build 'Job1'
+            echo 'hello ${version}'
+            dir(path: '/home')
           }
         }
 
         stage('check') {
-          environment {
-            tomcatstatus = '1'
-          }
           steps {
-            echo 'checking some service${tomcatstatus}'
+            echo 'done!'
           }
         }
 
       }
     }
 
-    stage('build&deploy') {
+    stage('build') {
       steps {
-        node(label: 'allocate-nodes') {
-          dir(path: 'D:/') {
-            bat 'cd D:/'
-          }
+        echo 'building'
+      }
+    }
 
-        }
-
+    stage('deploy') {
+      steps {
+        sh 'pwd'
+        sleep 2
       }
     }
 
     stage('test') {
       steps {
-        echo 'testing'
+        sh 'python -V'
+        echo 'testing finished'
       }
     }
 
